@@ -1,0 +1,244 @@
+/* Admin Styles for Simple Ad Manager */
+
+.thesiadm-metabox {
+    padding: 10px 0;
+}
+
+.thesiadm-metabox .form-table th {
+    width: 200px;
+    padding: 15px 10px 15px 0;
+}
+
+.thesiadm-metabox .form-table td {
+    padding: 15px 10px;
+}
+
+.thesiadm-metabox textarea,
+.thesiadm-metabox input[type="text"],
+.thesiadm-metabox input[type="url"],
+.thesiadm-metabox input[type="number"] {
+    font-size: 14px;
+}
+
+.thesiadm-metabox code {
+    background: #f0f0f1;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-size: 13px;
+}
+
+.thesiadm-metabox .description {
+    margin-top: 8px;
+    font-style: italic;
+    color: #646970;
+}
+
+/* Device Targeting Metabox */
+.thesiadm-device-metabox {
+    padding: 12px;
+}
+
+.thesiadm-device-metabox label {
+    display: flex;
+    align-items: center;
+    padding: 8px;
+    margin-bottom: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.thesiadm-device-metabox label:hover {
+    background: #f6f7f7;
+    border-color: #2271b1;
+}
+
+.thesiadm-device-metabox label input[type="checkbox"] {
+    margin: 0 8px 0 0;
+}
+
+.thesiadm-device-metabox label .dashicons {
+    margin-right: 6px;
+    font-size: 18px;
+}
+
+.thesiadm-device-metabox label strong {
+    font-weight: 600;
+}
+
+.thesiadm-device-metabox label input[type="checkbox"]:checked ~ strong {
+    color: #2271b1;
+}
+
+/* Preview Metabox */
+.thesiadm-preview-box {
+    padding: 12px;
+}
+
+.thesiadm-image-preview {
+    margin-bottom: 12px;
+}
+
+.thesiadm-image-preview img {
+    max-width: 100%;
+    height: auto;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+/* Admin Column Badges */
+.thesiadm-badge {
+    display: inline-block;
+    padding: 3px 8px;
+    font-size: 11px;
+    font-weight: 600;
+    line-height: 1.4;
+    border-radius: 3px;
+    text-transform: uppercase;
+}
+
+.thesiadm-badge-position {
+    background: #e3f2fd;
+    color: #1976d2;
+}
+
+.thesiadm-badge-image {
+    background: #e8f5e9;
+    color: #388e3c;
+}
+
+.thesiadm-badge-code {
+    background: #fff3e0;
+    color: #f57c00;
+}
+
+/* Column styles */
+.column-ad_position,
+.column-ad_type,
+.column-ad_priority {
+    width: 100px;
+}
+
+.column-target_urls {
+    width: 250px;
+}
+
+.column-target_devices {
+    width: 100px;
+    text-align: center;
+}
+
+.column-target_devices .dashicons {
+    color: #2271b1;
+    font-size: 16px;
+}
+
+.column-target_urls small {
+    color: #646970;
+    font-size: 12px;
+}
+
+/* Hide image fields when code type selected */
+.thesiadm-image-field.hidden {
+    display: none;
+}
+
+/* Ad listing improvements */
+.post-type-thesiadm_ad .wp-list-table {
+    border: 1px solid #c3c4c7;
+    border-radius: 4px;
+}
+
+.post-type-thesiadm_ad .widefat thead tr,
+.post-type-thesiadm_ad .widefat tfoot tr {
+    background: #f6f7f7;
+}
+
+/* Edit screen improvements */
+.post-type-thesiadm_ad #poststuff #post-body.columns-2 {
+    margin-right: 320px;
+}
+
+.post-type-thesiadm_ad #poststuff #post-body.columns-2 #side-sortables {
+    width: 300px;
+}
+
+/* Responsive admin styles */
+@media screen and (max-width: 782px) {
+    .column-target_urls,
+    .column-target_devices,
+    .column-ad_priority {
+        display: none;
+    }
+    
+    .thesiadm-metabox .form-table th,
+    .thesiadm-metabox .form-table td {
+        display: block;
+        width: 100%;
+        padding: 10px 0;
+    }
+}
+
+/* Help text styling */
+.thesiadm-help-text {
+    background: #f0f6fc;
+    border-left: 4px solid #2271b1;
+    padding: 12px;
+    margin: 15px 0;
+    border-radius: 4px;
+}
+
+.thesiadm-help-text strong {
+    color: #2271b1;
+}
+
+/* Success/Error messages */
+.thesiadm-notice {
+    padding: 12px;
+    margin: 15px 0;
+    border-radius: 4px;
+    border-left: 4px solid;
+}
+
+.thesiadm-notice-success {
+    background: #e8f5e9;
+    border-color: #388e3c;
+    color: #1b5e20;
+}
+
+.thesiadm-notice-error {
+    background: #ffebee;
+    border-color: #d32f2f;
+    color: #b71c1c;
+}
+
+.thesiadm-notice-warning {
+    background: #fff3e0;
+    border-color: #f57c00;
+    color: #e65100;
+}
+
+/* Loading state */
+.thesiadm-loading {
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+.thesiadm-loading::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    margin: -10px 0 0 -10px;
+    border: 2px solid #2271b1;
+    border-top-color: transparent;
+    border-radius: 50%;
+    animation: thesiadm-spin 0.6s linear infinite;
+}
+
+@keyframes thesiadm-spin {
+    to { transform: rotate(360deg); }
+}

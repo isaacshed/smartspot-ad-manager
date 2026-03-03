@@ -1,0 +1,320 @@
+# Copyright (C) 2025 SmartSpot Ad Manager
+# This file is distributed under the GPL v2 or later.
+msgid ""
+msgstr ""
+"Project-Id-Version: SmartSpot Ad Manager 1.0.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/smartspot-ad-manager\n"
+"POT-Creation-Date: 2025-10-19 12:00:00+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2025-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"X-Generator: WP-CLI 2.9.0\n"
+
+#: simple-ad-manager.php:35
+msgid "Manage Ads"
+msgstr ""
+
+#: simple-ad-manager.php:36
+msgid "Documentation"
+msgstr ""
+
+#: includes/class-ad-metaboxes.php:23
+msgctxt "Post Type General Name"
+msgid "Ads"
+msgstr ""
+
+#: includes/class-ad-metaboxes.php:24
+msgctxt "Post Type Singular Name"
+msgid "Ad"
+msgstr ""
+
+#: includes/class-ad-metaboxes.php:25
+msgid "Ad Manager"
+msgstr ""
+
+#: includes/class-ad-metaboxes.php:26
+msgid "Add New Ad"
+msgstr ""
+
+#: includes/class-ad-metaboxes.php:27
+msgid "Add New Ad"
+msgstr ""
+
+#: includes/class-ad-metaboxes.php:28
+msgid "Edit Ad"
+msgstr ""
+
+#: includes/class-ad-metaboxes.php:29
+msgid "New Ad"
+msgstr ""
+
+#: includes/class-ad-metaboxes.php:30
+msgid "View Ad"
+msgstr ""
+
+#: includes/class-ad-metaboxes.php:31
+msgid "Search Ads"
+msgstr ""
+
+#: includes/class-ad-metaboxes.php:32
+msgid "No ads found"
+msgstr ""
+
+#: includes/class-ad-metaboxes.php:33
+msgid "No ads found in trash"
+msgstr ""
+
+#: includes/class-ad-metaboxes.php:34
+msgid "All Ads"
+msgstr ""
+
+#: includes/class-ad-metaboxes.php:56
+msgid "URL Targeting"
+msgstr ""
+
+#: includes/class-ad-metaboxes.php:65
+msgid "Ad Settings"
+msgstr ""
+
+#: includes/class-ad-metaboxes.php:74
+msgid "Device Targeting"
+msgstr ""
+
+#: includes/class-ad-metaboxes.php:83
+msgid "Ad Code / HTML"
+msgstr ""
+
+#: includes/class-ad-metaboxes.php:92
+msgid "Ad Preview"
+msgstr ""
+
+#: includes/class-ad-metaboxes.php:107
+msgid "Specify which pages this ad should appear on. Enter one URL per line (relative paths work best)."
+msgstr ""
+
+#: includes/class-ad-metaboxes.php:113
+msgid "Matching Type"
+msgstr ""
+
+#: includes/class-ad-metaboxes.php:116
+msgid "Exact Match"
+msgstr ""
+
+#: includes/class-ad-metaboxes.php:117
+msgid "Contains (Pattern Match)"
+msgstr ""
+
+#: includes/class-ad-metaboxes.php:118
+msgid "Starts With"
+msgstr ""
+
+#: includes/class-ad-metaboxes.php:121
+msgid "Exact:"
+msgstr ""
+
+#: includes/class-ad-metaboxes.php:121
+msgid "/about-us/ (only this exact URL)"
+msgstr ""
+
+#: includes/class-ad-metaboxes.php:122
+msgid "Contains:"
+msgstr ""
+
+#: includes/class-ad-metaboxes.php:122
+msgid "/blog/ (matches /blog/, /blog/post-1/, /my-blog/, etc.)"
+msgstr ""
+
+#: includes/class-ad-metaboxes.php:123
+msgid "Starts With:"
+msgstr ""
+
+#: includes/class-ad-metaboxes.php:123
+msgid "/blog/ (matches /blog/, /blog/post-1/, /blog/category/tech/, etc.)"
+msgstr ""
+
+#: includes/class-ad-metaboxes.php:128
+msgid "Target URLs"
+msgstr ""
+
+#: includes/class-ad-metaboxes.php:132
+msgid "Enter URLs (one per line). Examples:"
+msgstr ""
+
+#: includes/class-ad-metaboxes.php:133
+msgid "(homepage)"
+msgstr ""
+
+#: includes/class-ad-metaboxes.php:156
+msgid "Ad Position"
+msgstr ""
+
+#: includes/class-ad-metaboxes.php:159
+msgid "Header"
+msgstr ""
+
+#: includes/class-ad-metaboxes.php:160
+msgid "Before Content"
+msgstr ""
+
+#: includes/class-ad-metaboxes.php:161
+msgid "After Content"
+msgstr ""
+
+#: includes/class-ad-metaboxes.php:162
+msgid "Sidebar"
+msgstr ""
+
+#: includes/class-ad-metaboxes.php:163
+msgid "Footer"
+msgstr ""
+
+#: includes/class-ad-metaboxes.php:164
+msgid "Custom Position 1"
+msgstr ""
+
+#: includes/class-ad-metaboxes.php:165
+msgid "Custom Position 2"
+msgstr ""
+
+#: includes/class-ad-metaboxes.php:167
+msgid "Choose where this ad should appear. Use shortcode or function call for custom positions."
+msgstr ""
+
+#: includes/class-ad-metaboxes.php:173
+msgid "Ad Type"
+msgstr ""
+
+#: includes/class-ad-metaboxes.php:176
+msgid "Image Ad"
+msgstr ""
+
+#: includes/class-ad-metaboxes.php:177
+msgid "Custom Code (AdSense, HTML, JavaScript)"
+msgstr ""
+
+#: includes/class-ad-metaboxes.php:179
+msgid "Image ads use the Featured Image. Code ads use the \"Ad Code\" box below."
+msgstr ""
+
+#: includes/class-ad-metaboxes.php:184
+msgid "Ad Link URL"
+msgstr ""
+
+#: includes/class-ad-metaboxes.php:186
+msgid "Where should users go when they click the image ad?"
+msgstr ""
+
+#: includes/class-ad-metaboxes.php:192
+msgid "Open in New Tab"
+msgstr ""
+
+#: includes/class-ad-metaboxes.php:196
+msgid "Open link in new tab/window"
+msgstr ""
+
+#: includes/class-ad-metaboxes.php:203
+msgid "Priority"
+msgstr ""
+
+#: includes/class-ad-metaboxes.php:206
+msgid "Lower number = higher priority. If multiple ads match, highest priority shows first."
+msgstr ""
+
+#: includes/class-ad-metaboxes.php:224
+msgid "Select which devices should display this ad:"
+msgstr ""
+
+#: includes/class-ad-metaboxes.php:230
+msgid "Desktop"
+msgstr ""
+
+#: includes/class-ad-metaboxes.php:236
+msgid "Mobile"
+msgstr ""
+
+#: includes/class-ad-metaboxes.php:242
+msgid "Tablet"
+msgstr ""
+
+#: includes/class-ad-metaboxes.php:247
+msgid "Note:"
+msgstr ""
+
+#: includes/class-ad-metaboxes.php:247
+msgid "Select at least one device. If none selected, ad will display on all devices."
+msgstr ""
+
+#: includes/class-ad-metaboxes.php:261
+msgid "Paste your ad code here (Google AdSense, custom HTML, JavaScript, etc.). Only used if Ad Type is set to \"Custom Code\"."
+msgstr ""
+
+#: includes/class-ad-metaboxes.php:264
+msgid "Tip:"
+msgstr ""
+
+#: includes/class-ad-metaboxes.php:264
+msgid "For Google AdSense, paste the entire script tag provided by Google."
+msgstr ""
+
+#: includes/class-ad-metaboxes.php:279
+msgid "Custom code preview not available. Preview will show on frontend."
+msgstr ""
+
+#: includes/class-ad-metaboxes.php:281
+msgid "Set a Featured Image to see preview."
+msgstr ""
+
+#: includes/class-ad-metaboxes.php:286
+msgid "Shortcode:"
+msgstr ""
+
+#: includes/class-ad-metaboxes.php:344
+msgid "Position"
+msgstr ""
+
+#: includes/class-ad-metaboxes.php:345
+msgid "Target URLs"
+msgstr ""
+
+#: includes/class-ad-metaboxes.php:346
+msgid "Type"
+msgstr ""
+
+#: includes/class-ad-metaboxes.php:347
+msgid "Devices"
+msgstr ""
+
+#: includes/class-ad-metaboxes.php:348
+msgid "Priority"
+msgstr ""
+
+#: includes/class-ad-metaboxes.php:384
+msgid "Custom Code"
+msgstr ""
+
+#: includes/class-ad-metaboxes.php:386
+msgid "Image"
+msgstr ""
+
+#: includes/class-ad-functions.php:44
+msgid "Simple Ad Manager"
+msgstr ""
+
+#: includes/class-ad-functions.php:46
+msgid "Display ads from Simple Ad Manager"
+msgstr ""
+
+#: includes/class-ad-functions.php:70
+msgid "Title:"
+msgstr ""
+
+#: includes/class-ad-functions.php:79
+msgid "Ad Position:"
+msgstr ""
+
+#: includes/class-ad-metaboxes.php:191 includes/class-ad-metaboxes.php:226 includes/class-ad-metaboxes.php:296 includes/class-ad-metaboxes.php:383
+msgid "Upgrade to Pro for $20 - Onetime →"
+msgstr ""

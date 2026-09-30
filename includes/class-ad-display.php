@@ -10,65 +10,75 @@ if (!defined('ABSPATH')) {
 
 if (!class_exists('THESIADM_Display')) {
     class THESIADM_Display {
-        
+
         public function __construct() {
-            // No automatic hooks - ads are displayed via function calls or shortcodes
+            add_filter('the_content', array($this, 'inject_automatic_positions'));
         }
-        
-        /**
-         * Get ads for current URL and position
-         */
+
+        public function inject_automatic_positions($content) {
+            if (is_admin()) {
+                return $content;
+            }
+
+            if (!is_singular()) {
+                return $content;
+            }
+
+            if (get_post_type() === 'thesiadm_ad') {
+                return $content;
+            }
+
+            $before = $this->render_ads('before-content');
+            $after  = $this->render_ads('after-content');
+
+            return $before . $content . $after;
+        }
+
         public function get_ads_for_position($position) {
-            $current_url = $this->get_current_url_path();
+            $current_url    = $this->get_current_url_path();
             $current_device = $this->detect_device();
-            
-            // Query for ads
+
             $args = array(
-                'post_type' => 'thesiadm_ad',
+                'post_type'      => 'thesiadm_ad',
                 'posts_per_page' => -1,
-                'post_status' => 'publish',
-                'meta_query' => array(
+                'post_status'    => 'publish',
+                'no_found_rows'  => true,
+                // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query -- Ad position is a low-cardinality postmeta filter used with no_found_rows=true.
+                'meta_query'     => array(
                     array(
-                        'key' => '_thesiadm_ad_position',
-                        'value' => $position,
-                        'compare' => '='
-                    )
+                        'key'     => '_thesiadm_ad_position',
+                        'value'   => $position,
+                        'compare' => '=',
+                    ),
                 ),
-                'orderby' => 'meta_value_num',
-                'order' => 'ASC',
-                'meta_key' => '_thesiadm_ad_priority'
+                'orderby'        => 'meta_value_num date',
+                'order'          => 'ASC',
+                // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key -- Ad priority meta_key ordering is bounded by the ad count and uses no_found_rows.
+                'meta_key'       => '_thesiadm_ad_priority',
             );
-            
+
             $ads = get_posts($args);
             $matching_ads = array();
-            
+
             foreach ($ads as $ad) {
-                // Check URL match
                 if (!$this->url_matches($ad->ID, $current_url)) {
                     continue;
                 }
-                
-                // Check device match
+
                 if (!$this->device_matches($ad->ID, $current_device)) {
                     continue;
                 }
-                
+
                 $matching_ads[] = $ad;
             }
-            
+
             return $matching_ads;
         }
-        
-        /**
-         * Detect current device type
-         */
+
         private function detect_device() {
-            // Check if wp_is_mobile() exists (WordPress function)
             if (function_exists('wp_is_mobile') && wp_is_mobile()) {
-                // Further detect if it's tablet or mobile
                 $user_agent = isset($_SERVER['HTTP_USER_AGENT']) ? sanitize_text_field(wp_unslash($_SERVER['HTTP_USER_AGENT'])) : '';
-                
-                // Tablet detection patterns
+
                 $tablet_patterns = array(
                     'iPad',
                     'tablet',
@@ -78,167 +88,160 @@ if (!class_exists('THESIADM_Display')) {
                     'Silk',
                     'Android(?!.*Mobile)',
                 );
-                
+
                 foreach ($tablet_patterns as $pattern) {
-                    if (preg_match('/' . $pattern . '/i', $user_agent)) {
+                    if (@preg_match('/' . $pattern . '/i', $user_agent)) {
                         return 'tablet';
                     }
                 }
-                
-                // If mobile but not tablet, it's mobile
+
                 return 'mobile';
             }
-            
-            // Desktop
+
             return 'desktop';
         }
-        
-        /**
-         * Check if current device matches ad targeting
-         */
+
         private function device_matches($ad_id, $current_device) {
             $target_devices = get_post_meta($ad_id, '_thesiadm_target_devices', true);
-            
-            // If no devices set or empty, show on all devices
+
             if (!is_array($target_devices) || empty($target_devices)) {
                 return true;
             }
-            
-            // Check if current device is in target devices
-            return in_array($current_device, $target_devices);
+
+            return in_array($current_device, $target_devices, true);
         }
-        
-        /**
-         * Check if current URL matches ad targeting
-         */
+
         private function url_matches($ad_id, $current_url) {
             $target_urls = get_post_meta($ad_id, '_thesiadm_target_urls', true);
-            $match_type = get_post_meta($ad_id, '_thesiadm_url_match_type', true);
-            
+            $match_type  = get_post_meta($ad_id, '_thesiadm_url_match_type', true);
+
             if (empty($target_urls)) {
-                return false;
+                return true;
             }
-            
-            // Split URLs by line
+
             $url_list = array_filter(array_map('trim', explode("\n", $target_urls)));
-            
+
+            if (empty($url_list)) {
+                return true;
+            }
+
+            $current_url = '/' . trim((string) $current_url, '/') . '/';
+
             foreach ($url_list as $target_url) {
-                // Normalize URLs
-                $target_url = '/' . trim($target_url, '/') . '/';
-                $current_url = '/' . trim($current_url, '/') . '/';
-                
+                $target_url = '/' . trim((string) $target_url, '/') . '/';
+
                 switch ($match_type) {
                     case 'exact':
                         if ($current_url === $target_url) {
                             return true;
                         }
                         break;
-                        
+
                     case 'contains':
-                        if (strpos($current_url, trim($target_url, '/')) !== false) {
+                        $needle = trim($target_url, '/');
+                        if ($needle !== '' && strpos($current_url, $needle) !== false) {
                             return true;
                         }
                         break;
-                        
+
                     case 'starts_with':
+                    default:
                         if (strpos($current_url, $target_url) === 0) {
                             return true;
                         }
                         break;
                 }
             }
-            
+
             return false;
         }
-        
-        /**
-         * Get current URL path
-         */
+
         private function get_current_url_path() {
-            $url_path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+            $req_uri  = isset($_SERVER['REQUEST_URI']) ? sanitize_text_field(wp_unslash($_SERVER['REQUEST_URI'])) : '';
+            $url_path = !empty($req_uri) ? wp_parse_url($req_uri, PHP_URL_PATH) : '/';
+
+            if (empty($url_path)) {
+                $url_path = '/';
+            }
+
             return $url_path;
         }
-        
-        /**
-         * Display ad HTML
-         */
+
         public function display_ad($ad) {
+            if (!is_object($ad) || !isset($ad->ID)) {
+                return '';
+            }
+
             $ad_type = get_post_meta($ad->ID, '_thesiadm_ad_type', true);
-            
+
             if ($ad_type === 'code') {
                 return $this->display_code_ad($ad);
-            } else {
-                return $this->display_image_ad($ad);
             }
+
+            return $this->display_image_ad($ad);
         }
-        
-        /**
-         * Display image ad
-         */
+
         private function display_image_ad($ad) {
-            $ad_link = get_post_meta($ad->ID, '_thesiadm_ad_link', true);
+            $ad_link      = get_post_meta($ad->ID, '_thesiadm_ad_link', true);
             $open_new_tab = get_post_meta($ad->ID, '_thesiadm_open_new_tab', true);
-            $image_url = get_the_post_thumbnail_url($ad->ID, 'full');
-            
+            $image_url    = get_the_post_thumbnail_url($ad->ID, 'full');
+            $ad_title     = get_the_title($ad);
+
             if (!$image_url) {
                 return '';
             }
-            
-            $target = $open_new_tab ? ' target="_blank" rel="noopener noreferrer"' : '';
-            
+
             ob_start();
             ?>
             <div class="thesiadm-ad-wrapper thesiadm-image-ad" data-ad-id="<?php echo esc_attr($ad->ID); ?>">
                 <?php if ($ad_link): ?>
-                    <a href="<?php echo esc_url($ad_link); ?>"<?php echo $target; ?> class="thesiadm-ad-link">
-                        <img src="<?php echo esc_url($image_url); ?>" alt="<?php echo esc_attr($ad->post_title); ?>" class="thesiadm-ad-image">
+                    <a href="<?php echo esc_url($ad_link); ?>"<?php if ('1' === $open_new_tab) { ?> target="_blank" rel="noopener noreferrer"<?php } ?> class="thesiadm-ad-link">
+                        <img src="<?php echo esc_url($image_url); ?>" alt="<?php echo esc_attr($ad_title); ?>" class="thesiadm-ad-image" loading="lazy">
                     </a>
                 <?php else: ?>
-                    <img src="<?php echo esc_url($image_url); ?>" alt="<?php echo esc_attr($ad->post_title); ?>" class="thesiadm-ad-image">
+                    <img src="<?php echo esc_url($image_url); ?>" alt="<?php echo esc_attr($ad_title); ?>" class="thesiadm-ad-image" loading="lazy">
                 <?php endif; ?>
             </div>
             <?php
             return ob_get_clean();
         }
-        
-        /**
-         * Display code ad
-         */
+
         private function display_code_ad($ad) {
             $ad_code = get_post_meta($ad->ID, '_thesiadm_ad_code', true);
-            
+
             if (!$ad_code) {
                 return '';
             }
-            
+
+            $allowed_html = thesiadm_get_allowed_ad_html();
+
             ob_start();
             ?>
             <div class="thesiadm-ad-wrapper thesiadm-code-ad" data-ad-id="<?php echo esc_attr($ad->ID); ?>">
-                <?php echo $ad_code; ?>
+                <?php echo wp_kses($ad_code, $allowed_html); ?>
             </div>
             <?php
             return ob_get_clean();
         }
-        
-        /**
-         * Render ads for a position
-         */
+
         public function render_ads($position) {
             $ads = $this->get_ads_for_position($position);
-            
+
             if (empty($ads)) {
                 return '';
             }
-            
-            $output = '<div class="thesiadm-position-wrapper thesiadm-position-' . esc_attr($position) . '">';
-            
-            foreach ($ads as $ad) {
-                $output .= $this->display_ad($ad);
-            }
-            
-            $output .= '</div>';
-            
-            return $output;
+
+            $allowed_html = thesiadm_get_allowed_ad_html();
+
+            ob_start();
+            ?>
+            <div class="thesiadm-position-wrapper thesiadm-position-<?php echo esc_attr($position); ?>">
+                <?php foreach ($ads as $ad): ?>
+                    <?php echo wp_kses($this->display_ad($ad), $allowed_html); ?>
+                <?php endforeach; ?>
+            </div>
+            <?php
+            return ob_get_clean();
         }
     }
 }

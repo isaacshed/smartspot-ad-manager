@@ -1,108 +1,107 @@
-/**
- * Public Styles for Simple Ad Manager
- */
+/* Public Styles for SmartSpot Ad Manager */
 
-/* Ad Position Wrappers */
-.sam-position-wrapper {
+.thesiadm-position-wrapper {
     margin: 40px auto;
     max-width: 100%;
     padding: 0 15px;
     clear: both;
 }
 
-.sam-position-wrapper.sam-position-header {
+.thesiadm-position-wrapper.thesiadm-position-header {
     margin: 20px auto;
 }
 
-.sam-position-wrapper.sam-position-footer {
+.thesiadm-position-wrapper.thesiadm-position-footer {
     margin: 30px auto 20px;
 }
 
-.sam-position-wrapper.sam-position-sidebar {
+.thesiadm-position-wrapper.thesiadm-position-sidebar {
     margin: 20px 0;
+    padding: 0;
 }
 
-/* Individual Ad Wrapper */
-.sam-ad-wrapper {
+.thesiadm-position-wrapper.thesiadm-position-before-content,
+.thesiadm-position-wrapper.thesiadm-position-after-content {
+    max-width: 1200px;
+}
+
+.thesiadm-ad-wrapper {
     margin-bottom: 30px;
     text-align: center;
     position: relative;
 }
 
-.sam-ad-wrapper:last-child {
+.thesiadm-ad-wrapper:last-child {
     margin-bottom: 0;
 }
 
-/* Image Ad Styles */
-.sam-image-ad {
+.thesiadm-position-wrapper .thesiadm-ad-wrapper + .thesiadm-ad-wrapper {
+    margin-top: 30px;
+}
+
+.thesiadm-image-ad {
     display: block;
 }
 
-.sam-ad-link {
+.thesiadm-ad-link {
     display: inline-block;
     line-height: 0;
     transition: opacity 0.3s ease, transform 0.2s ease;
 }
 
-.sam-ad-link:hover {
+.thesiadm-ad-link:hover {
     opacity: 0.9;
 }
 
-.sam-ad-link:active {
+.thesiadm-ad-link:active {
     transform: scale(0.98);
 }
 
-.sam-ad-image {
+.thesiadm-ad-link:focus {
+    outline: 2px solid #4a90e2;
+    outline-offset: 2px;
+}
+
+.thesiadm-ad-image {
     max-width: 100%;
     height: auto;
     display: block;
     border-radius: 4px;
+    margin: 0 auto;
 }
 
-/* Code Ad Styles */
-.sam-code-ad {
+.thesiadm-code-ad {
     overflow: hidden;
     min-height: 50px;
 }
 
-/* Common Ad Sizes */
-.sam-ad-wrapper.size-728x90 {
-    max-width: 728px;
-    margin-left: auto;
-    margin-right: auto;
+.thesiadm-code-ad ins.adsbygoogle {
+    display: block;
+    margin: 0 auto;
 }
 
-.sam-ad-wrapper.size-300x250 {
-    max-width: 300px;
-    margin-left: auto;
-    margin-right: auto;
+.thesiadm-elementor-wrapper,
+.thesiadm-divi-wrapper,
+.thesiadm-siteorigin-wrapper {
+    width: 100%;
 }
 
-.sam-ad-wrapper.size-160x600 {
-    max-width: 160px;
-}
-
-.sam-ad-wrapper.size-300x600 {
-    max-width: 300px;
-}
-
-/* Ad Label (optional - can be enabled via filter) */
-.sam-ad-label {
+.thesiadm-ad-label {
     font-size: 10px;
     color: #999;
     text-transform: uppercase;
     margin-bottom: 8px;
     letter-spacing: 0.5px;
+    text-align: center;
 }
 
-/* Loading State */
-.sam-ad-wrapper.sam-loading {
+.thesiadm-ad-wrapper.thesiadm-loading {
     min-height: 100px;
     background: #f5f5f5;
     position: relative;
 }
 
-.sam-ad-wrapper.sam-loading::after {
+.thesiadm-ad-wrapper.thesiadm-loading::after {
     content: "";
     position: absolute;
     top: 50%;
@@ -113,81 +112,18 @@
     border: 3px solid #ddd;
     border-top-color: #666;
     border-radius: 50%;
-    animation: sam-rotate 0.8s linear infinite;
+    animation: thesiadm-rotate 0.8s linear infinite;
 }
 
-@keyframes sam-rotate {
+@keyframes thesiadm-rotate {
     to { transform: rotate(360deg); }
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
-    .sam-position-wrapper {
-        padding: 0 10px;
-        margin: 30px auto;
-    }
-    
-    .sam-ad-wrapper {
-        margin-bottom: 20px;
-    }
-    
-    /* Hide large ads on mobile if needed */
-    .sam-ad-wrapper.hide-mobile {
-        display: none;
-    }
+.thesiadm-ad-wrapper.thesiadm-fade-in {
+    animation: thesiadmFadeIn 0.5s ease-in;
 }
 
-@media (min-width: 769px) and (max-width: 1024px) {
-    /* Tablet specific styles */
-    .sam-position-wrapper {
-        padding: 0 20px;
-    }
-}
-
-@media (min-width: 1025px) {
-    /* Desktop specific styles */
-    .sam-position-wrapper.sam-position-before-content,
-    .sam-position-wrapper.sam-position-after-content {
-        max-width: 1200px;
-    }
-}
-
-/* Accessibility */
-.sam-ad-link:focus {
-    outline: 2px solid #4a90e2;
-    outline-offset: 2px;
-}
-
-/* Print Styles */
-@media print {
-    .sam-position-wrapper,
-    .sam-ad-wrapper {
-        display: none !important;
-    }
-}
-
-/* RTL Support */
-[dir="rtl"] .sam-ad-wrapper {
-    text-align: center;
-}
-
-/* Dark Mode Support (optional) */
-@media (prefers-color-scheme: dark) {
-    .sam-ad-wrapper.sam-loading {
-        background: #2a2a2a;
-    }
-    
-    .sam-ad-label {
-        color: #666;
-    }
-}
-
-/* Animation on Load (optional) */
-.sam-ad-wrapper.sam-fade-in {
-    animation: samFadeIn 0.5s ease-in;
-}
-
-@keyframes samFadeIn {
+@keyframes thesiadmFadeIn {
     from {
         opacity: 0;
         transform: translateY(10px);
@@ -198,24 +134,74 @@
     }
 }
 
-/* Sticky Ad Support (can be added via filter) */
-.sam-ad-wrapper.sam-sticky {
+.thesiadm-ad-wrapper.size-728x90 {
+    max-width: 728px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.thesiadm-ad-wrapper.size-300x250 {
+    max-width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.thesiadm-ad-wrapper.size-160x600 {
+    max-width: 160px;
+}
+
+.thesiadm-ad-wrapper.size-300x600 {
+    max-width: 300px;
+}
+
+.thesiadm-ad-wrapper.thesiadm-sticky {
     position: sticky;
     top: 20px;
     z-index: 100;
 }
 
-/* Multiple Ads in Same Position */
-.sam-position-wrapper .sam-ad-wrapper + .sam-ad-wrapper {
-    margin-top: 30px;
-}
-
-/* AdSense Specific */
-.sam-code-ad ins.adsbygoogle {
-    display: block;
-}
-
-/* Fallback for No Ads */
-.sam-position-wrapper:empty {
+.thesiadm-position-wrapper:empty {
     display: none;
+}
+
+@media (max-width: 768px) {
+    .thesiadm-position-wrapper {
+        padding: 0 10px;
+        margin: 30px auto;
+    }
+
+    .thesiadm-ad-wrapper {
+        margin-bottom: 20px;
+    }
+
+    .thesiadm-ad-wrapper.hide-mobile {
+        display: none;
+    }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+    .thesiadm-position-wrapper {
+        padding: 0 20px;
+    }
+}
+
+@media print {
+    .thesiadm-position-wrapper,
+    .thesiadm-ad-wrapper {
+        display: none !important;
+    }
+}
+
+[dir="rtl"] .thesiadm-ad-wrapper {
+    text-align: center;
+}
+
+@media (prefers-color-scheme: dark) {
+    .thesiadm-ad-wrapper.thesiadm-loading {
+        background: #2a2a2a;
+    }
+
+    .thesiadm-ad-label {
+        color: #666;
+    }
 }

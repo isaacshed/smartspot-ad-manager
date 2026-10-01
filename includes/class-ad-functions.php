@@ -317,21 +317,14 @@ if (!function_exists('thesiadm_widget_admin_toggle_script')) {
         if ('widgets.php' !== $hook && 'customize.php' !== $hook) {
             return;
         }
-        ?>
-        <script type="text/javascript">
-        jQuery(document).on('change', '.thesiadm-widget-mode', function () {
-            var $wrap  = jQuery(this).closest('.widget, .widget-inside, .control-section');
-            var mode   = jQuery(this).val();
-            if ('single' === mode) {
-                $wrap.find('.thesiadm-widget-position-field').hide();
-                $wrap.find('.thesiadm-widget-ad-field').show();
-            } else {
-                $wrap.find('.thesiadm-widget-position-field').show();
-                $wrap.find('.thesiadm-widget-ad-field').hide();
-            }
-        });
-        </script>
-        <?php
+
+        wp_enqueue_script(
+            'thesiadm-widget-toggle',
+            THESIADM_PLUGIN_URL . 'assets/js/widget-toggle.js',
+            array('jquery'),
+            THESIADM_VERSION,
+            true
+        );
     }
     add_action('admin_enqueue_scripts', 'thesiadm_widget_admin_toggle_script');
 }

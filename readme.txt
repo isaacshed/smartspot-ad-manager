@@ -5,7 +5,7 @@ Tags: ads, advertising, ad manager, elementor, gutenberg
 Requires at least: 5.0
 Tested up to: 7.1
 Requires PHP: 7.2
-Stable tag: 2.0.2
+Stable tag: 2.0.3
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -24,15 +24,15 @@ No data is collected or transmitted by this plugin itself.
 
 == Description ==
 
-**SmartSpot Ad Manager** is the easiest way to manage advertising on your WordPress website. Display image ads or custom code ads (Google AdSense, HTML, JavaScript) anywhere on your site with precision URL targeting, device-specific controls, and native integrations for every major page builder.
+**SmartSpot Ad Manager** lets you manage advertising on your WordPress website. Display image ads or custom code ads (Google AdSense, HTML, JavaScript) anywhere on your site with URL targeting, device-specific controls, and native integrations for popular page builders.
 
 100% free & open-source. No Pro upgrades, no paywalls, no licensing.
 
-Perfect for bloggers, content creators, and website owners who want to monetize their site without the complexity of traditional ad management plugins.
+Suited for bloggers, content creators, and website owners who want to monetize their site using image and custom-code ads.
 
 ### Key Features
 
-* **Easy Ad Management** - Create and manage ads from a simple, intuitive interface.
+* **Easy Ad Management** - Create and manage ads from a straightforward admin interface.
 * **URL Targeting** - Display ads on specific pages, posts, or custom post types with exact, contains, or starts-with matching.
 * **Image Ads** - Upload banner images and set click-through URLs.
 * **Custom Code Ads** - Paste Google AdSense, HTML, or JavaScript ad code directly.

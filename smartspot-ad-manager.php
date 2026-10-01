@@ -2,8 +2,8 @@
 /**
  * Plugin Name: SmartSpot Ad Manager
  * Plugin URI: https://smartspotad.isaacauta.com
- * Description: The simplest way to manage ads on your WordPress site. Works perfectly with Elementor, Gutenberg, and all page builders.
- * Version: 2.0.2
+ * Description: Manage and display ads on your WordPress site. Native Elementor & Gutenberg support, 7 positions, device & URL targeting.
+ * Version: 2.0.3
  * Author: Isaac Shed
  * Text Domain: smartspot-ad-manager
  * Domain Path: /languages
@@ -15,7 +15,7 @@
 
 if (!defined('ABSPATH')) exit;
 
-define('THESIADM_VERSION', '2.0.2');
+define('THESIADM_VERSION', '2.0.3');
 define('THESIADM_PLUGIN_DIR', plugin_dir_path(__FILE__));
 define('THESIADM_PLUGIN_URL', plugin_dir_url(__FILE__));
 define('THESIADM_PLUGIN_BASENAME', plugin_basename(__FILE__));
@@ -38,7 +38,6 @@ class THESIADM_Plugin {
 
     private function init_hooks() {
         add_action('init', array($this, 'register_ad_post_type'));
-        add_action('plugins_loaded', array($this, 'load_textdomain'));
         add_action('admin_enqueue_scripts', array($this, 'enqueue_admin_assets'));
         add_action('wp_enqueue_scripts', array($this, 'enqueue_public_assets'));
         add_filter('plugin_action_links_' . THESIADM_PLUGIN_BASENAME, array($this, 'add_action_links'));
@@ -56,17 +55,6 @@ class THESIADM_Plugin {
 
         new THESIADM_Metaboxes();
         new THESIADM_Display();
-    }
-
-    public function load_textdomain() {
-        /*
-         * load_plugin_textdomain() is called here for backwards-compatibility
-         * with non-WordPress.org installs and pre-4.6 translation packs.
-         * WordPress.org-hosted installs auto-load translations from the
-         * language packs system regardless of this call.
-         */
-        // phpcs:ignore PluginCheck.CodeAnalysis.DiscouragedFunctions.load_plugin_textdomainFound
-        load_plugin_textdomain('smartspot-ad-manager', false, dirname(THESIADM_PLUGIN_BASENAME) . '/languages');
     }
 
     public function register_elementor_widget($widgets_manager) {
